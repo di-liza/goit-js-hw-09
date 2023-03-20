@@ -36,15 +36,13 @@ function convertMs(ms) {
   const hour = minute * 60;
   const day = hour * 24;
 
-  const days = addLeadingZero(Math.floor(ms / day));
+  const days = Math.floor(ms / day);
 
-  const hours = addLeadingZero(Math.floor((ms % day) / hour));
+  const hours = Math.floor((ms % day) / hour);
 
-  const minutes = addLeadingZero(Math.floor(((ms % day) % hour) / minute));
+  const minutes = Math.floor(((ms % day) % hour) / minute);
 
-  const seconds = addLeadingZero(
-    Math.floor((((ms % day) % hour) % minute) / second)
-  );
+  const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
   return { days, hours, minutes, seconds };
 }
@@ -54,10 +52,10 @@ function addLeadingZero(value) {
 }
 
 function updateClockface({ days, hours, minutes, seconds }) {
-  daysEl.textContent = days;
-  hoursEl.textContent = hours;
-  minutesEl.textContent = minutes;
-  secondsEl.textContent = seconds;
+  daysEl.textContent = addLeadingZero(days);
+  hoursEl.textContent = addLeadingZero(hours);
+  minutesEl.textContent = addLeadingZero(minutes);
+  secondsEl.textContent = addLeadingZero(seconds);
 }
 
 function getSelectedDate(selectedDates) {
